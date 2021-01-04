@@ -32,6 +32,8 @@ document.addEventListener('scroll', () => {
                 aside.style.top = endScroll + 'px';
             }
         }
+    }else{
+        aside.removeAttribute('style');
     }
     currPos = window.scrollY;
 }, {
