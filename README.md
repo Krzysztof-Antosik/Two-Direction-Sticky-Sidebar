@@ -13,7 +13,7 @@ To use a script, just add the attribute to our sidebar: `data-sticky="true"`.  O
 Example:
 
     <aside data-sticky="true">
-[A working example on JSFiddle](https://jsfiddle.net/antosik/71w2tg8c/55/)
+[A working example on JSFiddle](https://jsfiddle.net/antosik/71w2tg8c/57/)
 
 ## Download
 To download, just follow the link:
