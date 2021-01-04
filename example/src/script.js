@@ -3,7 +3,7 @@ const aside = document.querySelector('[data-sticky="true"]'),
 //varibles
 startScroll = 0;
 var endScroll = window.innerHeight - aside.offsetHeight -500,
-currPos = window.scrollY;
+currPos = window.scrollY,
 screenHeight = window.innerHeight,
 asideHeight = aside.offsetHeight;
 aside.style.top = startScroll + 'px';
