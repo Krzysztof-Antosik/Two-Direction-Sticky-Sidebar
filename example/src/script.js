@@ -33,7 +33,7 @@ document.addEventListener('scroll', () => {
             }
         }
     }else{
-        aside.removeAttribute('style');
+        aside.style.top = startScroll + 'px';
     }
     currPos = window.scrollY;
 }, {
