@@ -1,0 +1,30 @@
+body{
+    padding: 0 20px;
+  }
+  #content {
+    height: 1200px;
+  }
+  header {
+    width: 100%;
+    height: 150px;
+    background: #aaa;
+  }
+  main {
+    float: left;
+    width: 65%;
+    height: 100%;
+    background: #444;
+  }
+  aside {
+    float: right;
+    width: 30%;
+    height: 500px;
+    position: sticky;
+    top: 100px;
+    background: #777;
+  }
+  footer {
+    width: 100%;
+    height: 300px;
+    background: #555;
+  }
