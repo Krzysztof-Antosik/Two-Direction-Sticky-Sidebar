@@ -5,12 +5,12 @@ startScroll = 0;
 var endScroll = window.innerHeight - aside.offsetHeight -500,
 currPos = window.scrollY;
 screenHeight = window.innerHeight,
-asideHeight = aside.innerHeight;
+asideHeight = aside.offsetHeight;
 aside.style.top = startScroll + 'px';
 //check height screen and aside on resize
 window.addEventListener('resize', ()=>{
     screenHeight = window.innerHeight;
-    asideHeight = aside.innerHeight;
+    asideHeight = aside.offsetHeight;
 });
 //main function
 document.addEventListener('scroll', () => {
