@@ -9,12 +9,12 @@ I wrote code to use in my own project. All ready-made solutions used jQuery or h
 I share it because it may be useful to someone. I allow it to be freely modified. Perhaps I will extend the script in the future.
 
 ## Usage
-To use this script, add the attribute `data-sticky="true"` to your sidebar. This element should also have
+To use this script, add the attributes `data-sticky="true" data-top-gap="20" data-bottom-gap="20"` to your sidebar. This element should also have the following CSS styles
 
     position: sticky;
     top: 20px;
 
-Only one element can be used so far. 
+P.S. Only one element can be used so far
 
 ### Example
 
