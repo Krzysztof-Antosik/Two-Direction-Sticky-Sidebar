@@ -9,17 +9,17 @@ I wrote code to use in my own project. All ready-made solutions used jQuery or h
 I share it because it may be useful to someone. I allow it to be freely modified. Perhaps I will extend the script in the future.
 
 ## Usage
-To use this script, add the attributes `data-sticky="true" data-top-gap="20" data-bottom-gap="20"` to your sidebar. This element should also have the following CSS styles
 
-    position: sticky;
-    top: 20px;
+This is the use of this script you must add attribute: `data-sticky ="true"` to your Sidebar.
+
+If you want to optionally set gaps over or under the Sidebar you can use additional attributes:`data-top-gap="20" data-bottom-gap="20"`.
 
 P.S. Only one element can be used so far
 
 ### Example
 
     <aside data-sticky="true" data-top-gap="20" data-bottom-gap="20">
-*[A working example on JSFiddle](https://jsfiddle.net/antosik/71w2tg8c/75/)*
+*[A working example on JSFiddle](https://jsfiddle.net/antosik/kejofhtm/1/)*
 
 ## Download
 Follow this [GitHub archive link](https://github.com/Antosik-dev/Two-direction-Sticky-Sidebar/archive/main.zip)
