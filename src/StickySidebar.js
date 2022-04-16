@@ -11,7 +11,6 @@ var endScroll = window.innerHeight - stickyElement.offsetHeight - 500,
 currPos = window.scrollY,
 screenHeight = window.innerHeight,
 stickyElementHeight = stickyElement.offsetHeight;
-stickyElement.style.top = topGap + 'px';
 
 //Add required style to sticky element
 stickyElement.style.marginTop = topGap + 'px';
@@ -49,6 +48,7 @@ function position_sticky_sidebar() {
 
 //Check heights of the viewport and the sticky element on window resize and reapply positioning
 window.addEventListener('resize', ()=>{
+    currPos = window.scrollY,
     screenHeight = window.innerHeight;
     stickyElementHeight = stickyElement.offsetHeight;
     position_sticky_sidebar();

@@ -11,13 +11,12 @@ var endScroll = window.innerHeight - stickyElement.offsetHeight - 500,
 currPos = window.scrollY,
 screenHeight = window.innerHeight,
 stickyElementHeight = stickyElement.offsetHeight;
-stickyElement.style.top = topGap + 'px';
 
 //Add required style to sticky element
 stickyElement.style.marginTop = topGap + 'px';
 stickyElement.style.marginBottom = bottomGap + 'px';
 stickyElement.style.position = 'sticky';
-stickyElement.style.top = topGap + 'px';
+stickyElement.style.top = topGap + 'px'; 
 
 //Main function
 function position_sticky_sidebar() {
@@ -46,9 +45,10 @@ function position_sticky_sidebar() {
     }
     currPos = window.scrollY;
 }
- 
+
 //Check heights of the viewport and the sticky element on window resize and reapply positioning
 window.addEventListener('resize', ()=>{
+    currPos = window.scrollY,
     screenHeight = window.innerHeight;
     stickyElementHeight = stickyElement.offsetHeight;
     position_sticky_sidebar();
