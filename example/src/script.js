@@ -46,16 +46,17 @@ function position_sticky_sidebar() {
     currPos = window.scrollY;
 }
 
-//Check heights of the viewport and the sticky element on window resize and reapply positioning
-window.addEventListener('resize', ()=>{
-    currPos = window.scrollY,
-    screenHeight = window.innerHeight;
-    stickyElementHeight = stickyElement.offsetHeight;
-    position_sticky_sidebar();
-});
-
-//Follow the main function when scrolling
-document.addEventListener('scroll', position_sticky_sidebar, {
-    capture: true,
-    passive: true
-});
+setTimeout(() => {
+    //Check heights of the viewport and the sticky element on window resize and reapply positioning
+    window.addEventListener('resize', ()=>{
+        currPos = window.scrollY,
+        screenHeight = window.innerHeight;
+        stickyElementHeight = stickyElement.offsetHeight;
+        position_sticky_sidebar();
+    });   
+    //Follow the main function when scrolling
+    document.addEventListener('scroll', position_sticky_sidebar, {
+        capture: true,
+        passive: true
+    }); 
+}, 100);
