@@ -19,7 +19,7 @@ P.S. Only one element can be used so far
 ### Example
 
     <aside data-sticky="true" data-top-gap="20" data-bottom-gap="20">
-*[A working example on JSFiddle](https://jsfiddle.net/antosik/kejofhtm/1/)*
+*[A working example on JSFiddle](https://jsfiddle.net/antosik/5s3x8zbj/)*
 
 ## Download
 Follow this [GitHub archive link](https://github.com/Antosik-dev/Two-direction-Sticky-Sidebar/archive/main.zip)
