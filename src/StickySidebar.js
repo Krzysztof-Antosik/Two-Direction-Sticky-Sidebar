@@ -47,13 +47,14 @@ function position_sticky_sidebar() {
 }
 
 //Check heights of the viewport and the sticky element on window resize and reapply positioning
-window.addEventListener('resize', ()=>{
-    currPos = window.scrollY,
-    screenHeight = window.innerHeight;
-    stickyElementHeight = stickyElement.offsetHeight;
-    position_sticky_sidebar();
-});
-
+setTimeout(() => {
+    window.addEventListener('resize', ()=>{
+        currPos = window.scrollY,
+        screenHeight = window.innerHeight;
+        stickyElementHeight = stickyElement.offsetHeight;
+        position_sticky_sidebar();
+    });    
+}, 100);
 //Follow the main function when scrolling
 document.addEventListener('scroll', position_sticky_sidebar, {
     capture: true,
