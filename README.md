@@ -1,5 +1,5 @@
 # Two Direction Sticky Sidebar
-**Bi-directionally scrolling sticky sidebar in pure JavaScript (ES6) and CSS3 for use in any project**
+**Bi-directionally scrolling sticky sidebar in pure JavaScript for use in any project**
 
 A short JavaScript code that allows you to quickly and easily implement a Sticky Sidebar, if the browser's viewport is too short, sidebar's contents will scroll  in the direction the user scrolls and sticks to either top or bottom of the screen when there's no more content. And everything with the use of pure JavaScript, thanks to which you we'll save redundant code and gain efficiency.
 ![working of code](https://github.com/Antosik-dev/Two-direction-Sticky-Sidebar/blob/main/sticky-sidebar.png?raw=true)
