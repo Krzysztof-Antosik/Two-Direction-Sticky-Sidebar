@@ -2,21 +2,32 @@
 const stickyElement = document.querySelector('[data-sticky="true"]'),
 
 //..and other constant
-startPosition = stickyElement.getBoundingClientRect().top,
-topGap = stickyElement.hasAttribute('data-top-gap') ? parseInt(stickyElement.getAttribute('data-top-gap')) : 0,
-bottomGap =  stickyElement.hasAttribute('data-bottom-gap') ? parseInt(stickyElement.getAttribute('data-bottom-gap')) : 0;
+startPosition = stickyElement.getBoundingClientRect().top;
 
 //Varibles
 var endScroll = window.innerHeight - stickyElement.offsetHeight - 500,
 currPos = window.scrollY,
 screenHeight = window.innerHeight,
-stickyElementHeight = stickyElement.offsetHeight;
+stickyElementHeight = stickyElement.offsetHeight
+topGap = 0,
+bottomGap = 0;
+
+//Set Gaps
+setTimeout(() => {
+    if (stickyElement.hasAttribute('data-top-gap')){
+        const dataTopGap = stickyElement.getAttribute('data-top-gap');
+        topGap = String(dataTopGap) == "auto" ? startPosition : parseInt(dataTopGap);
+    }
+
+    if (stickyElement.hasAttribute('data-bottom-gap')){
+        bottomGap = parseInt(stickyElement.getAttribute('data-bottom-gap'));
+    }
+}, 100);
 
 //Add required style to sticky element
-stickyElement.style.marginTop = topGap + 'px';
-stickyElement.style.marginBottom = bottomGap + 'px';
 stickyElement.style.position = 'sticky';
 stickyElement.style.top = topGap + 'px'; 
+stickyElement.style.height = "fit-content";
 
 //Main function
 function position_sticky_sidebar() {
