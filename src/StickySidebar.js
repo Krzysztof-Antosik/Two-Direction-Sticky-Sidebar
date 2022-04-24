@@ -30,7 +30,7 @@ stickyElement.style.top = topGap + 'px';
 stickyElement.style.height = "fit-content";
 
 //Main function
-function position_sticky_sidebar() {
+function positionStickySidebar() {
     endScroll = window.innerHeight - stickyElement.offsetHeight - bottomGap;
     let stickyElementTop = parseInt(stickyElement.style.top.replace('px;', ''));
     if (stickyElementHeight>screenHeight) {
@@ -56,18 +56,23 @@ function position_sticky_sidebar() {
     }
     currPos = window.scrollY;
 }
-
+function stickyElementToMe(){
+    stickyElement.style.top = topGap + 'px';
+}
+function updateSticky(){
+    screenHeight = window.innerHeight;
+    stickyElementHeight = stickyElement.offsetHeight;
+    positionStickySidebar();
+}
 setTimeout(() => {
     //Check heights of the viewport and the sticky element on window resize and reapply positioning
     window.addEventListener('resize', ()=>{
-        currPos = window.scrollY,
-        screenHeight = window.innerHeight;
-        stickyElementHeight = stickyElement.offsetHeight;
-        position_sticky_sidebar();
+        currPos = window.scrollY;
+        updateSticky();
     });   
     //Follow the main function when scrolling
-    document.addEventListener('scroll', position_sticky_sidebar, {
+    document.addEventListener('scroll', updateSticky, {
         capture: true,
         passive: true
     }); 
-}, 100);
+}, 1000);
