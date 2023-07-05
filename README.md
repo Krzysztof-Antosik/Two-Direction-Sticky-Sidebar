@@ -3,7 +3,6 @@
 
 A short JavaScript code that allows you to quickly and easily implement a Sticky Sidebar, if the browser's viewport is too short, sidebar's contents will scroll  in the direction the user scrolls and sticks to either top or bottom of the screen when there's no more content. And everything with the use of pure JavaScript, thanks to which you we'll save redundant code and gain efficiency.
 ![working of code](https://github.com/Antosik-dev/Two-direction-Sticky-Sidebar/blob/main/sticky-sidebar.png?raw=true)
-*[source of the original picture](https://abouolia.github.io/sticky-sidebar/)*
 
 I wrote code to use in my own project. All ready-made solutions used jQuery or had a lot of unnecessary code.
 I share it because it may be useful to someone. I allow it to be freely modified. Perhaps I will extend the script in the future.
