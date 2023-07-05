@@ -29,4 +29,4 @@ or run in the terminal:
 ## Support
 
 If you found a bug or would like to contribute to the development, please contact me:
-[krzysztof@antosik.dev](mailto:krzysztof@antosik.dev)
+[krzysztof@antosik.dev](mailto:krzysztof@antosik.dev) or use contact form on my website: [antosik.dev](https://antosik.dev)
