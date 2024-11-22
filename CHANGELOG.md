@@ -1,8 +1,5 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.  
-The changelog for versions prior to 1.6 will be added in the future.
-
 ## [1.7] - 2024-11-22
 ### Added
 - Introduced mobile optimization by disabling sticky behavior on screens narrower than 768px.
