@@ -13,7 +13,7 @@ This is the use of this script you must add attribute: `data-sticky ="true"` to 
 
 If you want to optionally set gaps over or under the Sidebar you can use additional attributes:`data-top-gap="20" data-bottom-gap="20"`.
 
-You can also add the `data-mobile-width` attribute to Sidebar. If you set it, for example: `data-mobile-width="768" the script will stop working when the screen is smaller than 768px. This allows for greater control over the responsiveness of the page.
+You can also add the `data-mobile-width` attribute to Sidebar. If you set it, for example: `data-mobile-width="768"` the script will stop working when the screen is smaller than 768px. This allows for greater control over the responsiveness of the page.
 
 P.S. Only one element can be used so far
 
