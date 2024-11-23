@@ -19,7 +19,7 @@ P.S. Only one element can be used so far
 
 ### Example
 
-    <aside data-sticky="true" data-top-gap="20" data-bottom-gap="20">
+    <aside data-sticky="true" data-top-gap="20" data-bottom-gap="20" data-mobile-width="768">
 *[A working demo](https://tdss.antosik.dev/)*
 
 ## Changelog
