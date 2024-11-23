@@ -1,5 +1,6 @@
 body{
   padding: 0 20px;
+  font-size: 20px;
 }
 div {
   display: flex;
@@ -37,7 +38,7 @@ ul {
 }
 
 li {
-  height: 40px;
+  height: 60px;
 }
 
 footer {
