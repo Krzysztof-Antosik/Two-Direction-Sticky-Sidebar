@@ -7,6 +7,8 @@ A short JavaScript code that allows you to quickly and easily implement a Sticky
 I wrote code to use in my own project. All ready-made solutions used jQuery or had a lot of unnecessary code.
 I share it because it may be useful to someone. I allow it to be freely modified. Perhaps I will extend the script in the future.
 
+you can read more about the project in my article (in Polish): [Two Direction Sticky Sidebar – JavaScript - Antosik.dev]([https://tdss.antosik.dev/](https://antosik.dev/projekty/dwukierunkowy-pasek-boczny-two-direction-sticky-sidebar/))
+
 ## Usage
 
 This is the use of this script you must add attribute: `data-sticky ="true"` to your Sidebar.
@@ -41,4 +43,4 @@ or run in the terminal:
 ## Support
 
 If you found a bug or would like to contribute to the development, please contact me:
-[krzysztof@antosik.dev](mailto:krzysztof@antosik.dev) or use contact form on my website: [antosik.dev](https://antosik.dev)
+[krzysztof@antosik.dev](mailto:krzysztof@antosik.dev) or use contact form on my website: [antosik.dev](https://antosik.dev/formularz-kontaktowy/)
