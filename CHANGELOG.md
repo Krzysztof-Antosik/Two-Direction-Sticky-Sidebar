@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.7.1] - 2024-11-22
+### Fixed
+- In some cases, the two-way sticky sidebar would not start automatically. This has been fixed
+
 ## [1.7] - 2024-11-22
 ### Added
 - Introduced mobile optimization by disabling sticky behavior on screens narrower than 768px.
