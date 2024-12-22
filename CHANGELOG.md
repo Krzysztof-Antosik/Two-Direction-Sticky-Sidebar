@@ -1,6 +1,9 @@
 # Changelog
 
 ## [1.7.1] - 2024-11-22
+### Changed
+- Updated header comment.
+
 ### Fixed
 - In some cases, the two-way sticky sidebar would not start automatically. This has been fixed
 

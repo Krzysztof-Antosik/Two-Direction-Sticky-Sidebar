@@ -30,6 +30,7 @@ You can view the full changelog [here](CHANGELOG.md).
 
 ### Recent Updates
 - **[1.7.1] - 2024-11-22**  
+  - Updated header comment.
   - In some cases, the two-way sticky sidebar would not start automatically. This has been fixed.  
 
 - **[1.7] - 2024-11-22**  
