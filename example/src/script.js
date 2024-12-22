@@ -115,20 +115,28 @@ if (stickyElement) { // Ensure the sticky element exists before proceeding.
         positionStickySidebar();                         // Adjust the position accordingly.
     }
 
+	//Initialize sticky
+	function initSticky(){
+		width = window.innerWidth;  // Update viewport width.
+		currPos = window.scrollY;   // Update current scroll position.
+		updateSticky();             // Adjust sticky position.
+		offStickyOnMobile();        // Reapply sticky or disable it based on screen width.
+		//stickyElementToMe();		// Reset position
+	}
+
     // Initialize event listeners after a short delay.
     setTimeout(() => {
         // Adjust on window resize to account for changing viewport dimensions.
-        window.addEventListener(`resize`, () => {
-            width = window.innerWidth;  // Update viewport width.
-            currPos = window.scrollY;   // Update current scroll position.
-            updateSticky();             // Adjust sticky position.
-            offStickyOnMobile();        // Reapply sticky or disable it based on screen width.
-        });
+        window.addEventListener(`resize`, ()=>{
+			initSticky();
+		});
 
         // Trigger position updates on every scroll event.
         document.addEventListener(`scroll`, updateSticky, {
             capture: true,   // Ensures the event is handled during the capture phase.
             passive: true    // Improves performance by signaling that the listener won't call `preventDefault`.
         });
+		
+		initSticky();
     }, 300); // Delay allows for DOM setup and style application.
 }
