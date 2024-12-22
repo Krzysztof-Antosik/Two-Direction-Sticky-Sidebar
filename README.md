@@ -29,6 +29,9 @@ P.S. Only one element can be used so far
 You can view the full changelog [here](CHANGELOG.md).
 
 ### Recent Updates
+- **[1.7.1] - 2024-11-22**  
+  - In some cases, the two-way sticky sidebar would not start automatically. This has been fixed.  
+
 - **[1.7] - 2024-11-22**  
   - Added mobile optimization for sticky behavior.  
   - Fixed style persistence issues on mobile.  
