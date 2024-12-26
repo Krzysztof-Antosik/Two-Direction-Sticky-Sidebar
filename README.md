@@ -7,7 +7,7 @@ A short JavaScript code that allows you to quickly and easily implement a Sticky
 I wrote code to use in my own project. All ready-made solutions used jQuery or had a lot of unnecessary code.
 I share it because it may be useful to someone. I allow it to be freely modified. Perhaps I will extend the script in the future.
 
-you can read more about the project in my article (in Polish): [Two Direction Sticky Sidebar – JavaScript - Antosik.dev](https://antosik.dev/projekty/dwukierunkowy-pasek-boczny-two-direction-sticky-sidebar/)
+you can read more about the project in my article (in Polish): [Two Direction Sticky Sidebar – JavaScript - Antosik.dev](https://antosik.dev/projekty/two-direction-sticky-sidebar/)
 
 ## Usage
 
