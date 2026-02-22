@@ -1,28 +1,18 @@
 /**
  * StickySidebar.js
- * A short JavaScript code that allows you to quickly and easily implement a Sticky Sidebar,
- * if the browser's viewport is too short, sidebar's contents will scroll in the direction
- * the user scrolls and sticks to either top or bottom of the screen when there's no more content. 
- * And everything with the use of pure JavaScript, 
- * thanks to which you we'll save redundant code and gain efficiency.
- * -- Krzysztof Antosik
+ * Optimized version with Live Attribute Monitoring (MutationObserver).
  *
- *
- * @license The MIT License, https://github.com/Krzysztof-Antosik/Two-direction-Sticky-Sidebar/blob/main/LICENSE
- * @version 1.8.7
+ * @version 1.8.8
  * @author   Krzysztof Antosik, https://github.com/Krzysztof-Antosik/
- * @contributors Krzysztof-Antosik, vadim-on-github 
  * @changelog https://github.com/Krzysztof-Antosik/Two-Direction-Sticky-Sidebar/blob/main/CHANGELOG.md
  * @link     https://github.com/Krzysztof-Antosik/Two-direction-Sticky-Sidebar/
  * @demo     https://tdss.antosik.dev/
- *
  */
 
 (() => {
     'use strict';
 
     const initStickySidebar = () => {
-        // Target the sidebar element
         const stickyElement = document.querySelector('[data-sticky-sidebar]') || 
                              document.querySelector('[data-sticky="true"]');
         
@@ -39,34 +29,46 @@
             isTicking: false
         };
 
-        /**
-         * INITIALIZATION
-         * Injects attributes if missing and reads their values.
-         */
-        function init() {
-            // Force inject attributes if they don't exist in HTML
-            if (!stickyElement.hasAttribute('data-top-gap')) {
-                stickyElement.setAttribute('data-top-gap', '0');
-            }
-            if (!stickyElement.hasAttribute('data-bottom-gap')) {
-                stickyElement.setAttribute('data-bottom-gap', '0');
-            }
-            if (!stickyElement.hasAttribute('data-mobile-width')) {
-                stickyElement.setAttribute('data-mobile-width', '0');
-            }
-
+        // Reads attributes and updates the internal state
+        function updateFromAttributes() {
             const data = stickyElement.dataset;
             const rect = stickyElement.getBoundingClientRect();
             const initialRectTop = rect.top + window.scrollY;
 
-            // Read values (now guaranteed to exist as attributes)
             state.topGap = data.topGap === 'auto' ? initialRectTop : (parseInt(data.topGap) || 0);
             state.bottomGap = parseInt(data.bottomGap) || 0;
             state.mobileWidth = parseInt(data.mobileWidth) || 0;
 
+            // Immediate re-apply
             updateMetrics();
             applyInitialStyles();
             positionSidebar();
+        }
+
+        function init() {
+            // Force inject defaults if missing
+            if (!stickyElement.hasAttribute('data-top-gap')) stickyElement.setAttribute('data-top-gap', '0');
+            if (!stickyElement.hasAttribute('data-bottom-gap')) stickyElement.setAttribute('data-bottom-gap', '0');
+            if (!stickyElement.hasAttribute('data-mobile-width')) stickyElement.setAttribute('data-mobile-width', '0');
+
+            updateFromAttributes();
+            setupObserver();
+        }
+
+        /**
+         * MUTATION OBSERVER
+         * Watches for changes in data-attributes and triggers update
+         */
+        function setupObserver() {
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName.startsWith('data-')) {
+                        updateFromAttributes();
+                    }
+                });
+            });
+
+            observer.observe(stickyElement, { attributes: true });
         }
 
         function updateMetrics() {
@@ -79,8 +81,6 @@
                 stickyElement.style.position = 'sticky';
                 stickyElement.style.height = 'fit-content';
                 state.lastComputedTop = state.topGap;
-                
-                // Use !important to override any CSS conflicts
                 stickyElement.style.setProperty('top', `${state.lastComputedTop}px`, 'important');
             } else {
                 stickyElement.style.removeProperty('position');
@@ -100,19 +100,15 @@
                 state.lastComputedTop = state.topGap;
             } else {
                 let targetTop = state.lastComputedTop + scrollDelta;
-
                 if (newScrollY < state.currentScrollY) { 
-                    // Scrolling Up
                     targetTop = Math.min(state.topGap, targetTop);
                 } else { 
-                    // Scrolling Down
                     targetTop = Math.max(bottomLimit, targetTop);
                 }
                 state.lastComputedTop = targetTop;
             }
 
             stickyElement.style.setProperty('top', `${state.lastComputedTop}px`, 'important');
-            
             state.currentScrollY = newScrollY;
             state.isTicking = false;
         }
@@ -124,14 +120,12 @@
             }
         };
 
-        const onResize = () => {
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', () => {
             updateMetrics();
             applyInitialStyles();
             positionSidebar();
-        };
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onResize);
+        });
 
         init();
     };
