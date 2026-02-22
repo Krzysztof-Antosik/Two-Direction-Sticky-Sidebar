@@ -9,7 +9,7 @@
  *
  *
  * @license The MIT License, https://github.com/Krzysztof-Antosik/Two-direction-Sticky-Sidebar/blob/main/LICENSE
- * @version 1.7.1
+ * @version 1.8.0
  * @author  Krzysztof Antosik, https://github.com/Krzysztof-Antosik/
  * @contributors Krzysztof-Antosik, vadim-on-github 
  * @changelog https://github.com/Krzysztof-Antosik/Two-Direction-Sticky-Sidebar/blob/main/CHANGELOG.md
@@ -18,126 +18,148 @@
  *
  */
 
-// Select the element designated to be sticky using a custom `data-sticky="true"` attribute.
-const stickyElement = document.querySelector(`[data-sticky="true"]`);
+JavaScript
+/**
+ * StickySidebar.js - Optimized & Documented Version
+ * High-performance sticky sidebar logic using requestAnimationFrame.
+ */
 
-if (stickyElement) { // Ensure the sticky element exists before proceeding.
+(() => {
+    // 1. SELECTOR: Find the element with the data-sticky="true" attribute.
+    const stickyElement = document.querySelector(`[data-sticky="true"]`);
+    
+    // Safety check: if the element doesn't exist, stop execution immediately.
+    if (!stickyElement) return;
 
-    // Define constants and calculate the initial position of the sticky element.
-    const startPosition = stickyElement.getBoundingClientRect().top; // Initial top offset of the sticky element relative to the viewport.
+    /**
+     * STATE OBJECT: Centralized storage for variables to avoid global scope pollution
+     * and frequent DOM reads (which are expensive for performance).
+     */
+    let state = {
+        topGap: 0,              // Distance from the top edge of the viewport.
+        bottomGap: 0,           // Distance from the bottom edge of the viewport.
+        mobileWidth: 0,         // Breakpoint below which stickiness is disabled.
+        stickyElementHeight: 0, // Current height of the sidebar.
+        screenHeight: 0,        // Current height of the browser window.
+        currPos: window.scrollY,// Tracks the previous scroll position to detect direction.
+        lastTopValue: 0,        // Cached numeric value of the 'top' CSS property.
+        isScrolling: false      // Flag to prevent multiple function calls per frame.
+    };
 
-    // Variables for managing sticky behavior.
-    var endScroll = window.innerHeight - stickyElement.offsetHeight - 500, // Lower boundary for sticky movement.
-        currPos = window.scrollY,                                        // Current scroll position of the viewport.
-        screenHeight = window.innerHeight,                              // Height of the browser viewport.
-        stickyElementHeight = stickyElement.offsetHeight,               // Height of the sticky element.
-        topGap = 0,                                                     // Space between the top of the viewport and the sticky element.
-        bottomGap = 0,                                                  // Space between the bottom of the sticky element and the viewport.
-        width = window.innerWidth,                                      // Current width of the viewport.
-		mobileWidth = 0; 												// Width threshold below which the sticky behavior will be disabled.
+    /**
+     * INITIALIZATION: Reads attributes and sets up the starting values.
+     */
+    function initSettings() {
+        // Calculate initial top position relative to the document.
+        const startPosition = stickyElement.getBoundingClientRect().top + window.scrollY;
+        
+        // Use Dataset API for cleaner attribute access.
+        const { topGap, bottomGap, mobileWidth } = stickyElement.dataset;
 
-    // Set `topGap` and `bottomGap` based on the attributes of the sticky element.
-    setTimeout(() => {
-        if (stickyElement.hasAttribute(`data-top-gap`)) {
-            const dataTopGap = stickyElement.dataset.topGap;
-            // If `data-top-gap` is "auto," use the element's initial position; otherwise, parse the value.
-            topGap = String(dataTopGap) == "auto" ? startPosition : parseInt(dataTopGap);
-        }
-
-        if (stickyElement.hasAttribute(`data-bottom-gap`)) {
-            // Parse the `data-bottom-gap` value to define the distance from the bottom.
-            bottomGap = parseInt(stickyElement.dataset.bottomGap);
-        }
-
-		if (stickyElement.hasAttribute(`data-mobile-width`)) {
-            // Parse the `data-bottom-gap` value to define the distance from the bottom.
-            mobileWidth = parseInt(stickyElement.dataset.mobileWidth);
-        }
-
-
-    }, 100); // Delay allows attributes to be properly set.
-
-    // Function to disable sticky behavior on mobile devices.
-    function offStickyOnMobile() {
-        if (width > mobileWidth) { // Enable sticky behavior only for larger screens.
-            stickyElement.style.position = `sticky`;        // Enable sticky positioning.
-            stickyElement.style.top = topGap + `px`;        // Set top offset using `topGap`.
-            stickyElement.style.height = "fit-content";     // Ensure the height adapts to the content.
-        } else {
-            stickyElement.removeAttribute(`style`); // Remove inline styles to disable sticky behavior.
-        }
+        // Parse values: handle "auto" for topGap and ensure others are valid numbers.
+        state.topGap = topGap === "auto" ? startPosition : (parseInt(topGap) || 0);
+        state.bottomGap = parseInt(bottomGap) || 0;
+        state.mobileWidth = parseInt(mobileWidth) || 0;
+        
+        // Initial measurement of dimensions.
+        updateDimensions();
+        // Check if we should apply sticky behavior based on screen width.
+        checkMobileStatus();
     }
-    offStickyOnMobile(); // Apply the function initially.
 
-    // Main function to dynamically adjust the sticky sidebar's position during scrolling.
-    function positionStickySidebar() {
-        endScroll = window.innerHeight - stickyElement.offsetHeight - bottomGap; // Recalculate lower boundary.
-        let stickyElementTop = parseInt(stickyElement.style.top.replace(`px`, ``)); // Current top offset of the sticky element.
+    /**
+     * UPDATE DIMENSIONS: Refreshes height values (called on resize/load).
+     */
+    function updateDimensions() {
+        state.screenHeight = window.innerHeight;
+        state.stickyElementHeight = stickyElement.offsetHeight;
+    }
 
-        // Check if the sticky element exceeds the viewport height.
-        if (stickyElementHeight + topGap + bottomGap > screenHeight) {
-            if (window.scrollY < currPos) {
-                // Scrolling up
-                if (stickyElementTop < topGap) {
-                    // Move the sidebar upwards as the user scrolls up.
-                    stickyElement.style.top = (stickyElementTop + currPos - window.scrollY) + `px`;
-                } else if (stickyElementTop >= topGap && stickyElementTop != topGap) {
-                    // Snap to the top gap if it overshoots.
-                    stickyElement.style.top = topGap + `px`;
-                }
-            } else {
-                // Scrolling down
-                if (stickyElementTop > endScroll) {
-                    // Move the sidebar downwards as the user scrolls down.
-                    stickyElement.style.top = (stickyElementTop + currPos - window.scrollY) + `px`;
-                } else if (stickyElementTop < endScroll && stickyElementTop != endScroll) {
-                    // Snap to the bottom limit if it overshoots.
-                    stickyElement.style.top = endScroll + `px`;
-                }
+    /**
+     * MOBILE CHECK: Resets or applies styles based on the viewport width.
+     */
+    function checkMobileStatus() {
+        if (window.innerWidth <= state.mobileWidth) {
+            // Remove all inline styles if on mobile to restore natural flow.
+            stickyElement.removeAttribute('style');
+            return false;
+        }
+        // Basic sticky setup for desktop.
+        stickyElement.style.position = 'sticky';
+        stickyElement.style.height = 'fit-content';
+        return true;
+    }
+
+    /**
+     * CORE LOGIC: Calculates the dynamic position of the sidebar.
+     * Triggered inside requestAnimationFrame for maximum smoothness.
+     */
+    function positionSidebar() {
+        // Skip logic if we are below the mobile breakpoint.
+        if (window.innerWidth <= state.mobileWidth) return;
+
+        const scrollY = window.scrollY;
+        // Difference in scroll since the last frame.
+        const scrollDelta = state.currPos - scrollY;
+        // The "bottom limit" where the sidebar stops scrolling down.
+        const endScroll = state.screenHeight - state.stickyElementHeight - state.bottomGap;
+
+        // CASE A: The sidebar is shorter than the viewport.
+        // It acts like a standard CSS sticky element.
+        if (state.stickyElementHeight + state.topGap + state.bottomGap <= state.screenHeight) {
+            state.lastTopValue = state.topGap;
+        } 
+        // CASE B: The sidebar is taller than the viewport.
+        // It must scroll with the user until its top/bottom edge is reached.
+        else {
+            let newTop = state.lastTopValue + scrollDelta;
+
+            if (scrollY < state.currPos) { 
+                // USER SCROLLING UP: Sidebar moves up but stops at topGap.
+                newTop = Math.min(state.topGap, newTop);
+            } else { 
+                // USER SCROLLING DOWN: Sidebar moves down but stops at endScroll.
+                newTop = Math.max(endScroll, newTop);
             }
-        } else {
-            // If the sticky element fits within the viewport, keep it at the top gap.
-            stickyElement.style.top = topGap + `px`;
+            state.lastTopValue = newTop;
         }
 
-        // Update the current scroll position for the next cycle.
-        currPos = window.scrollY;
+        // Apply the calculated position to the DOM.
+        stickyElement.style.top = `${state.lastTopValue}px`;
+        
+        // Store current scroll for the next frame's comparison.
+        state.currPos = scrollY;
+        // Reset flag so the next scroll event can trigger an animation frame.
+        state.isScrolling = false;
     }
 
-    // Resets the sticky element's position to the top gap.
-    function stickyElementToMe() {
-        stickyElement.style.top = topGap + `px`;
-    }
+    /**
+     * SCROLL HANDLER: Throttles the scroll event using requestAnimationFrame.
+     * This prevents the browser from recalculating styles more than 60 times/sec.
+     */
+    const onScroll = () => {
+        if (!state.isScrolling) {
+            state.isScrolling = true;
+            requestAnimationFrame(positionSidebar);
+        }
+    };
 
-    // Updates dimensions and calls `positionStickySidebar` to adjust positioning.
-    function updateSticky() {
-        screenHeight = window.innerHeight;               // Update viewport height.
-        stickyElementHeight = stickyElement.offsetHeight; // Update sidebar height.
-        positionStickySidebar();                         // Adjust the position accordingly.
-    }
+    /**
+     * EVENT LISTENERS
+     */
+    
+    // Resize handling: update measurements and re-check mobile status.
+    window.addEventListener('resize', () => {
+        updateDimensions();
+        if (checkMobileStatus()) positionSidebar();
+    });
 
-	//Initialize sticky
-	function initSticky(){
-		width = window.innerWidth;  // Update viewport width.
-		currPos = window.scrollY;   // Update current scroll position.
-		updateSticky();             // Adjust sticky position.
-		offStickyOnMobile();        // Reapply sticky or disable it based on screen width.
-		//stickyElementToMe();		// Reset position
-	}
+    // Scroll handling: use 'passive: true' to improve mobile performance.
+    document.addEventListener('scroll', onScroll, { passive: true });
 
-    // Initialize event listeners after a short delay.
-    setTimeout(() => {
-        // Adjust on window resize to account for changing viewport dimensions.
-        window.addEventListener(`resize`, ()=>{
-			initSticky();
-		});
-
-        // Trigger position updates on every scroll event.
-        document.addEventListener(`scroll`, updateSticky, {
-            capture: true,   // Ensures the event is handled during the capture phase.
-            passive: true    // Improves performance by signaling that the listener won't call `preventDefault`.
-        });
-		
-		initSticky();
-    }, 300); // Delay allows for DOM setup and style application.
-}
+    /**
+     * STARTUP
+     */
+    initSettings();
+    positionSidebar();
+})();
