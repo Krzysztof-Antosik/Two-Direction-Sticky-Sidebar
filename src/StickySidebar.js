@@ -9,7 +9,7 @@
  *
  *
  * @license The MIT License, https://github.com/Krzysztof-Antosik/Two-direction-Sticky-Sidebar/blob/main/LICENSE
- * @version 1.8.0
+ * @version 1.8.1
  * @author  Krzysztof Antosik, https://github.com/Krzysztof-Antosik/
  * @contributors Krzysztof-Antosik, vadim-on-github 
  * @changelog https://github.com/Krzysztof-Antosik/Two-Direction-Sticky-Sidebar/blob/main/CHANGELOG.md
