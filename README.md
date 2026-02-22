@@ -11,13 +11,24 @@ you can read more about the project in my article (in Polish): [Two Direction St
 
 ## Usage
 
+Using the script is straightforward. Simply add the `data-sticky-sidebar` attribute to your sidebar element:
+
+`<aside data-sticky-sidebar></aside>`
+
 This is the use of this script you must add attribute: `data-sticky ="true"` to your Sidebar.
 
-If you want to optionally set gaps over or under the Sidebar you can use additional attributes:`data-top-gap="20" data-bottom-gap="20"`.
+Configuration via Data Attributes
+The script automatically initializes with default values (0), but you can customize it directly in HTML using the following attributes:
 
-You can also add the `data-mobile-width` attribute to Sidebar. If you set it, for example: `data-mobile-width="768"` the script will stop working when the screen is smaller than 768px. This allows for greater control over the responsiveness of the page.
+`data-top-gap`: (Default: 0) Margin (in pixels) between the top of the viewport and the sidebar.
 
-P.S. Only one element can be used so far
+`data-bottom-gap`: (Default: 0) Margin (in pixels) between the bottom of the viewport and the sidebar.
+
+`data-mobile-width`: (Default: 0) Screen width (in pixels) below which the sticky effect is disabled.
+
+Example with custom settings:
+
+`<aside data-sticky-sidebar data-top-gap="140" data-bottom-gap="40" data-mobile-width="1024"></aside>`
 
 ### Example
 
