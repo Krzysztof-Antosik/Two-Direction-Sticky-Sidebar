@@ -1,8 +1,6 @@
 # Changelog
 
 ## [1.8.8] - 2026-02-22
-### Changed
-- Updated header comment.
 
 ### Added
 - MutationObserver Integration: The sidebar now monitors its own data-attributes for live updates without page refresh.
