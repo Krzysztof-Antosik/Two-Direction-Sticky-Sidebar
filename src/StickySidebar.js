@@ -18,7 +18,7 @@
  *
  */
 
-JavaScript
+
 /**
  * StickySidebar.js - Optimized & Documented Version
  * High-performance sticky sidebar logic using requestAnimationFrame.
