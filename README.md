@@ -30,7 +30,7 @@ Example with custom settings:
 
 `<aside data-sticky-sidebar data-top-gap="140" data-bottom-gap="40" data-mobile-width="1024"></aside>`
 
-### Demo
+## Demo
 
 *[A working demo](https://tdss.antosik.dev/)*
 
