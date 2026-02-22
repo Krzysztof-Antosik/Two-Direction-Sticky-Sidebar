@@ -29,6 +29,15 @@ P.S. Only one element can be used so far
 You can view the full changelog [here](CHANGELOG.md).
 
 ### Recent Updates
+- **[1.8.8] - 2026-02-22**  
+  - MutationObserver Integration: The sidebar now monitors its own data-attributes for live updates without page refresh.
+  - Auto-Injection Mechanism: Missing data-attributes are automatically populated with default values (0) upon initialization.
+  - Performance Optimization: Implemented requestAnimationFrame for smoother scrolling and reduced CPU overhead.
+  - tandardized selector to [data-sticky-sidebar] with backward compatibility for [data-sticky="true"].
+  - Forced CSS priority using style.setProperty with !important to override external theme styles. 
+  - Improved initialization logic to handle slow-loading dynamic content (images/ads).
+  - Eliminated layout thrashing during rapid window resizing or scrolling.
+
 - **[1.7.1] - 2024-11-22**  
   - Updated header comment.
   - In some cases, the two-way sticky sidebar would not start automatically. This has been fixed.  
