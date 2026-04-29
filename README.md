@@ -15,7 +15,7 @@ Using the script is straightforward. Simply add the `data-sticky-sidebar` attrib
 
 `<aside data-sticky-sidebar></aside>`
 
-This is the use of this script you must add attribute: `data-sticky ="true"` to your Sidebar.
+This is the use of this script you must add attribute: `data-sticky-sidebar` to your Sidebar.
 
 Configuration via Data Attributes
 The script automatically initializes with default values (0), but you can customize it directly in HTML using the following attributes:
